@@ -1,0 +1,7 @@
+{
+  "name": "sistegeo-apk",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
