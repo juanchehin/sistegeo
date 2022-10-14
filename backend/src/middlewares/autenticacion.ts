@@ -1,4 +1,4 @@
-var jwt = require('jsonwebtoken');
+// var jwt = require('jsonwebtoken');
 var SEED = require('../config/config').SEED;
 
 import { Request, Response, NextFunction } from 'express';
@@ -11,18 +11,6 @@ import { Request, Response, NextFunction } from 'express';
 exports.verificaToken = function(req: Request,res:Response,next: NextFunction){
 var token = req.headers.token;
 
-jwt.verify(token , SEED, (err: any,decoded: any) =>{
-
-    if(err){
-        return res.status(401).json({
-            ok:false,
-            mensaje: 'TOKEN incorrecto',
-            errors: err
-        });
-    }
-    next();
-
-});
 
 }
 

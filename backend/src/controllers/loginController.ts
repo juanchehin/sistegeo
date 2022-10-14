@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-var jwt = require('jsonwebtoken');
+// var jwt = require('jsonwebtoken');
 
 var SEED = require('../config/config').SEED;
 
@@ -38,7 +38,7 @@ pool.query(`call bsp_dame_persona_correo_pass('${email}','${pass}')`, function(e
     }
 
     
-    var token = jwt.sign({ usuario: email }, SEED, { expiresIn: 14400});
+    // var token = jwt.sign({ usuario: email }, SEED, { expiresIn: 14400});
     
     //   IdRol 1 - Clientes
     if(result[0][0].IdRol === 1) {
@@ -51,9 +51,8 @@ pool.query(`call bsp_dame_persona_correo_pass('${email}','${pass}')`, function(e
     
                 // Se ejecuta una actualizacion de cliente cada vez que accede de forma exitosa, verifica la cantidad de clases
                 // su estado , si tiene meses de credito , etc
-                console.log('Justo antes de actualiza estado cliente y IdPeronsa es ',result[0][0].IdPersona);
+
                 const respuesta = pool.query('call bsp_actualiza_estado_cliente(?)',result[0][0].IdPersona);
-                console.log('respuesta de actualiza es : ',respuesta);
     }
 
     // IdRol 3 - Administrador
@@ -82,7 +81,7 @@ pool.query(`call bsp_dame_persona_correo_pass('${email}','${pass}')`, function(e
         ok: true,
         usuario: result[0][0].correo,
         IdRol: result[0][0].IdRol,
-        token: token,    // <-- Devuelvo el token al front end
+        // token: token,    // <-- Devuelvo el token al front end
         id: result[0][0].IdPersona,
         menu: menu
     });
@@ -102,11 +101,11 @@ public async renuevatoken(req: Request, res: Response): Promise<void> {
     
     var body = req.body;    // Usuario y contraseña
 
-    var token = jwt.sign({ usuario: body.correo }, SEED, { expiresIn: 14400});// 4 horas
+    // var token = jwt.sign({ usuario: body.correo }, SEED, { expiresIn: 14400});// 4 horas
 
     res.status(200).json({
         ok: true,
-        token: token
+        // token: token
     });
 
 }

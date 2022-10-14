@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Services } from '../services/services';
 
 @Component({
   selector: 'app-folder',
@@ -13,7 +14,8 @@ export class FolderPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private services: Services
     ) { }
 
   ngOnInit() {
@@ -37,6 +39,8 @@ export class FolderPage implements OnInit {
 
          watch.subscribe((data) => {
           console.log("data es : ",data);
+
+          this.services.enviarData(data);
           // data can be a set of coordinates, or an error (if an error occurred).
           // data.coords.latitude
           // data.coords.longitude

@@ -11,7 +11,7 @@ class GeolocalizacionController {
 // ==================================================
 
 public async recibeData(req: Request, res: Response): Promise<void> {
-     console.log(req.body);
+     console.log("req body en back es : ",req.body);
 
  }
  
