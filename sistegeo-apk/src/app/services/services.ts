@@ -22,12 +22,11 @@ export class Services {
 enviarData( dataLtLg: any ) {
   console.log("data es service : " + dataLtLg);
 
-  let url = URL_SERVICIOS + '/dataGeolocalizacion' ;
+  let url = URL_SERVICIOS + '/dataGeolocalizacion';
 
-  return this.http.get(
-    url,
-    dataLtLg
-  );
+  console.log("url es service : " + url);
+
+    this.http.get( url,dataLtLg ).subscribe();
 }
 
 }
