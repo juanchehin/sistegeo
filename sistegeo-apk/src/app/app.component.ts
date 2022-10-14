@@ -17,9 +17,11 @@ export class AppComponent {
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   public labels = [];
+
   constructor(private geolocation: Geolocation) {
-    this.getGeolocation();
+    // this.getGeolocation();
   }
+
 
   getGeolocation(){
 
@@ -33,6 +35,7 @@ export class AppComponent {
 
      let watch = this.geolocation.watchPosition();
      watch.subscribe((data) => {
+      console.log("data es : ",data);
       // data can be a set of coordinates, or an error (if an error occurred).
       // data.coords.latitude
       // data.coords.longitude
