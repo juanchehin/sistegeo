@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 // import indexRoutes from './routes/indexRoutes';
 import loginRoutes from './routes/loginRoutes';
-import personasRoutes from './routes/personasRoutes';
+import geolocalizacionRoutes from './routes/geolocalizacionRoutes';
 
 
 class Server {
@@ -57,7 +57,7 @@ class Server {
         //     }
         //   }
 
-        this.app.use('/api/personas', personasRoutes);
+        this.app.use('/api/dataGeolocalizacion', geolocalizacionRoutes);
         this.app.use('/api/login', loginRoutes);
 
     }
