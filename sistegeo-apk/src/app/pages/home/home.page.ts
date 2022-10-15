@@ -1,30 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Services } from '../services/services';
+import { Services } from '../../services/services';
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: [],
 })
-export class FolderPage implements OnInit {
+export class HomePage implements OnInit {
   public folder: string;
   public estadoJornada = false;
   public now: Date = new Date();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
-    private services: Services
-    ) {
-      setInterval(() => {
-        this.now = new Date();
-      }, 1);
-    }
+    private services: Services) {
+    setInterval(() => {
+      this.now = new Date();
+    }, 1);
+   }
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
 
@@ -58,5 +54,6 @@ export class FolderPage implements OnInit {
         //  watch.unsubscribe();
     }
   }
+
 
 }
