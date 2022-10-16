@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { MapaComponent } from './mapa/mapa.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { ChoferesComponent } from './choferes/choferes.component';
 
 
 @NgModule({
     declarations: [
         PagesComponent,
-        MapaComponent
+        MapaComponent,
+        ChoferesComponent
         // HeaderComponent,
         // SidebarComponent,
         // FooterComponent
