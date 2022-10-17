@@ -1,56 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup} from '@angular/forms';
-import { ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
-  styleUrls: []
+  styleUrls: ['./mapa.component.css']
 })
 export class MapaComponent implements OnInit {
-  forma!: FormGroup;
-  cargando = true;
-  persona: any;
-  movimientosCliente: any[] = [];
-  private date!: any;
-  valor = 0;
-  totalMovimientosCliente = 0;
-  desde = 0;
-
-
 
   constructor(
-    private activatedRoute: ActivatedRoute
     ) { }
 
 
   ngOnInit() {
   }
 
-// ==================================================
-//        Carga de persona
-// ==================================================
+  zoom: number = 15;
+  lat: number = 28.626137;
+  lng: number = 79.821603;
+  lastInfoWindow: any;
 
-cargarPersona() {
+  markers: any[] = [
+    {
+      lat: 28.625485,
+      lng: 79.821091,
+      label: { color: 'white', text: 'P1' },
+      draggable: true
+    },
+    {
+      lat: 28.625293,
+      lng: 79.817926,
+      label: { color: 'white', text: 'P2' },
+      draggable: false
+    },
+    {
+      lat: 28.625182,
+      lng: 79.814640,
+      label: { color: 'white', text: 'P3' },
+      draggable: true
+    }
+  ]
+
+  markerClicked(marker: any, index: number, infoWindowRef: any) {
+    if (this.lastInfoWindow) {
+      this.lastInfoWindow.close();
+    }
+    this.lastInfoWindow = infoWindowRef;
+    console.log(marker, index);
+  }
+
+  mapClicked($event: any) {
+    this.markers.push({
+      lat: $event.coords.lat,
+      lng: $event.coords.lng,
+      draggable: true
+    });
+  }
+
+  markerDragEnd($event: any, index: number) {
+    console.log($event.coords.lat);
+    console.log($event.coords.lng);
+  }
 
 }
-
-// ==================================================
-//   Carga los movimientos de un cierto cliente, dado su id
-// ==================================================
-
-cargarMovimientosCliente() {
-
-
-
-}
-// ==================================================
-//        Cambio de valor
-// ==================================================
-
-cambiarDesde( valor: number ) {
-
-
-}
-}
-
