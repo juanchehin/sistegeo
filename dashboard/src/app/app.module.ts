@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceModule } from './services/service.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     PagesModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
-    // RouterModule.forRoot(routes)
+    HttpClientModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

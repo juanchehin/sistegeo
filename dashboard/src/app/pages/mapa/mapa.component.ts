@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { sharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -8,11 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapaComponent implements OnInit {
 
-  constructor(
-    ) { }
-
+  constructor(private sharedService: sharedService) { }
 
   ngOnInit() {
+    this.actualizarPosicion();
   }
 
   zoom: number = 15;
@@ -61,5 +62,24 @@ export class MapaComponent implements OnInit {
     console.log($event.coords.lat);
     console.log($event.coords.lng);
   }
+
+// ===================================
+//    Actualiza la posicion cada 3 segundos
+// =================================
+
+actualizarPosicion(){
+
+  interval(3000).subscribe(x =>
+
+    this.sharedService.damePosicion()
+               .subscribe( (resp: any) => {
+
+                console.log("resp es : ", resp);
+
+              })
+
+  )
+
+}
 
 }

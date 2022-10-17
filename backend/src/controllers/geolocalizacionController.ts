@@ -1,20 +1,28 @@
-import { Request, Response, NextFunction, response } from 'express';
-import pool from '../database';
-const fs = require('fs');
+import { Request, Response } from 'express';
 
-const path = require('path');
 
 class GeolocalizacionController {
 
-// ==================================================
-//        .....
-// ==================================================
-
-public async recibeData(req: Request, res: Response): Promise<void> {
-     console.log("req en back es : ",req);
-
- }
- 
+    // ==================================================
+    //        .....
+    // ==================================================
+    
+    public async recibeData(req: Request, res: Response): Promise<void> {
+         console.log("req en back es : ",req);
+    
+     }
+     
+    // ==================================================
+    //   Obtiene la data de localizacion y la devuelve
+    //    al front 
+    // ==================================================
+    
+    public async getData(req: Request, res: Response): Promise<void> {
+        console.log("req getData : ",req);
+    
+        res.json('data devuelta');
+    
+    }
 }
 
 
