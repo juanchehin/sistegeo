@@ -30,11 +30,10 @@ class JornadaController {
     
     public async inicioJornada(req: Request, res: Response): Promise<void> {      
 
-        var latitud = req.body.latitud;
-        var longitud = req.body.longitud;
         var IdVehiculo = req.body.IdVehiculo;
+        var IdUsuario = req.body.IdUsuario;
 
-        pool.query(`call bsp_inicio_jornada('${IdVehiculo}','${latitud}','${longitud}')`, function(err: any, result: any){
+        pool.query(`call bsp_inicio_jornada('${IdVehiculo}','${IdUsuario}')`, function(err: any, result: any){
             if(err){
                 console.log("error", err);
                 return;
@@ -53,8 +52,10 @@ class JornadaController {
     // ==================================================
     
     public async finJornada(req: Request, res: Response): Promise<void> {
+        var IdVehiculo = req.params.IdVehiculo;
+        var IdUsuario = req.params.IdUsuario;
 
-        pool.query(`call bsp_fin_jornada()`, function(err: any, result: any){
+        pool.query(`call bsp_fin_jornada('${IdVehiculo}','${IdUsuario}')`, function(err: any, result: any){
             if(err){
                 console.log("error", err);
                 return;
@@ -63,11 +64,8 @@ class JornadaController {
                 "result": 'Ok'
             });
         })
-    
-    
     }
 }
-
 
 const jornadaController = new JornadaController;
 export default jornadaController;

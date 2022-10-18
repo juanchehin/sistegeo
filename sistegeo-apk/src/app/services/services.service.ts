@@ -38,11 +38,9 @@ trazabilidad( dataLtLg: any ) {
 // ==================================================
 //  Inicia la jornada
 // ==================================================
-inicioJornada( IdVehiculo: number,IdUsuario: number ) {
+inicioJornada( IdVehiculo: number,IdUsuario: string ) {
 
   let url = URL_SERVICIOS + '/jornada/inicio';
-
-  console.log("url es finJornada service : " + url);
 
   this.http.post( url,
     {
@@ -56,13 +54,12 @@ inicioJornada( IdVehiculo: number,IdUsuario: number ) {
 // ==================================================
 //  Finaliza jornada
 // ==================================================
-finJornada(  ) {
+finJornada( IdVehiculo: number,IdUsuario: string ) {
 
-  let url = URL_SERVICIOS + '/jornada/fin';
+  let url = URL_SERVICIOS + '/jornada/fin/' + IdVehiculo + '/' + IdUsuario;
 
-  console.log("url es finJornada service : " + url);
 
-  this.http.get( url );
+  this.http.get( url ).subscribe();
 
 }
 

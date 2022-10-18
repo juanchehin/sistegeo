@@ -20,8 +20,6 @@ export class AuthService {
     private alertCtrl: AlertController
   ) {}
 
-  IdVehiculo: number;
-  IdUsuario: number;
 
 // ==================================================
 //        Permite saber si un usuario esta logueado
@@ -58,7 +56,6 @@ estaLogueado() {
         .subscribe((response: any) =>
           {
 
-            console.log("response es : ",response);
             if(response.mensaje != 'Error de credenciales')
             {
               Preferences.set({
@@ -68,13 +65,15 @@ estaLogueado() {
 
               Preferences.set({
                   key: 'IdUsuario',
-                  value: response.IdUsuario,
+                  value: response.IdUsuario
                 });
 
-              Preferences.set({
-                  key: 'IdVehiculo',
-                  value: response.IdVehiculo,
-                });
+              // this.IdUsuario = response.IdUsuario;
+              // console.log("This.idusuario es : ",this.IdUsuario)
+              // Preferences.set({
+              //     key: 'IdVehiculo',
+              //     value: response.IdVehiculo,
+              //   });
 
               return true;
             }

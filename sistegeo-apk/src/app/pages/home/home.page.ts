@@ -3,6 +3,8 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Services } from '../../services/services.service';
 import { Subscription } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
+import { AuthService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,15 @@ export class HomePage implements OnInit {
   public now: Date = new Date();
   vehiculos!: any;
   watch: Subscription;
-  IdVehiculo: number;
+  IdUsuario: string;
   vehiculoSeleccionado = 0;
+  handlerMessage = '';
+  roleMessage = '';
 
   constructor(
     private geolocation: Geolocation,
     private services: Services,
+    // private authServices: AuthService,
     private alertCtrl: AlertController
     ) {
     setInterval(() => {
@@ -30,8 +35,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.listarVehiculos();
-    // this.IdVehiculo = this.services.IdVehiculo;
-    // this.IdUsuario = this.services.IdUsuario;
+    this.cargarStorage();
   }
 
   // ==============================
@@ -44,21 +48,23 @@ export class HomePage implements OnInit {
       this.showAlert('Debe seleccionar un vehiculo');
       return;
     }
-    this.estadoJornada = !this.estadoJornada;
 
-    if(this.estadoJornada)
+    if(!this.estadoJornada)
     {
-      this.services.inicioJornada(1,1);
+      console.log("IdUsuario es : ",this.IdUsuario)
+      // this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
+      this.services.inicioJornada(this.vehiculoSeleccionado,'1');
 
       this.watch = this.geolocation.watchPosition().subscribe(pos => {
         this.services.trazabilidad(pos);
       });
+      this.estadoJornada = !this.estadoJornada;
 
     }
     else
     {
-      this.watch.unsubscribe();
-      this.services.finJornada();
+      this.presentAlert();
+
     }
 
   }
@@ -87,6 +93,13 @@ cambios(nuevoValor: any) {
 
     this.vehiculoSeleccionado = nuevoValor;
 
+    // const setName = async () => {
+    //   await Preferences.set({
+    //     key: 'IdVehiculo',
+    //     value: nuevoValor
+    //   });
+    // };
+
     // this.cargarClientes();
 }
 
@@ -100,4 +113,49 @@ cambios(nuevoValor: any) {
       })
       .then(alertEl => alertEl.present());
   }
+
+  // ==============================
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: '¿Desea finalizar la jornada?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.handlerMessage = 'Alert canceled';
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.handlerMessage = 'Alert confirmed';
+
+            this.watch.unsubscribe();
+            this.services.finJornada(this.vehiculoSeleccionado,'1');
+            this.estadoJornada = !this.estadoJornada;
+
+
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
+}
+// ==============================
+cargarStorage() {
+  console.log("cargarStorage es : ");
+
+  async () => {
+    const { value } = await Preferences.get({ key: 'IdUsuario' });
+    console.log("value es : ",value);
+    this.IdUsuario = value;
+  };
+}
+
 }
