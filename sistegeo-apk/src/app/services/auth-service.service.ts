@@ -58,6 +58,7 @@ estaLogueado() {
         .subscribe((response: any) =>
           {
 
+            console.log("response es : ",response);
             if(response.mensaje != 'Error de credenciales')
             {
               Preferences.set({

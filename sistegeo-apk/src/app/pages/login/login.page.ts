@@ -32,8 +32,6 @@ export class LoginPage implements OnInit {
       .create({ keyboardClose: true, message: 'Logging in...' })
       .then(loadingEl => {
         loadingEl.present();
-        // let authObs: Observable<any>;
-        // let authObs: boolean;
 
         if (this.authService.login(user, password)) {
 

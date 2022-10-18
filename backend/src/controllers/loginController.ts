@@ -19,27 +19,27 @@ public async login(req: Request, res: Response){
 
     pool.query(`call bsp_login('${user}','${pass}')`, function(err: any, result: string | any[]){
 
-    if(err){
-        console.log("err es : ",err);
-    }
-
-    if(result[0][0].Mensaje !== 'Ok' || null){
-        
-        res.json({
-            ok: true,
-            mensaje : 'Error de credenciales'
-        });  
-        return;
-    }
+        if(err){
+            console.log("err es : ",err);
+        }
     
-    // Respuesta
-    res.status(200).json({
-        ok: true,
-        usuario: result[0][0].user,
-        mensaje : 'Ok',
-        // token: token,    // <-- Devuelvo el token al front end
-        IdUsuario: result[0][0].IdUsuario
-    });
+        if(result[0][0].Mensaje !== 'Ok' || null){
+            
+            res.json({
+                ok: true,
+                mensaje : 'Error de credenciales'
+            });  
+            return;
+        }
+        
+        // Respuesta
+        res.status(200).json({
+            ok: true,
+            usuario: result[0][0].pUsuario1,
+            mensaje : 'Ok',
+            // token: token,    // <-- Devuelvo el token al front end
+            IdUsuario: result[0][0].pIdUsuario
+        });
     
 })
 
