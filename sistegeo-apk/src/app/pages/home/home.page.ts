@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
-  styleUrls: [],
+  styleUrls: []
 })
 export class HomePage implements OnInit {
   public folder: string;
@@ -56,11 +56,8 @@ export class HomePage implements OnInit {
 
     if(!this.estadoJornada)
     {
-      console.log("IdUsuario es : ",this.IdUsuario)
-      console.log("Usuario es : ",this.Usuario)
 
       this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
-      // this.services.inicioJornada(this.vehiculoSeleccionado,'1');
 
       this.watch = this.geolocation.watchPosition().subscribe(pos => {
         this.services.trazabilidad(this.vehiculoSeleccionado,pos);

@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
   ) { }
 
   canActivate() {
-    console.log("pasa estalogueado : ",this.authService.estaLogueado())
+
     if ( this.authService.estaLogueado()) {
       return true;
      } else {
