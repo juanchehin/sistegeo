@@ -14,6 +14,8 @@ export class AuthService {
 
   token: any;
   IdUsuario: any;
+  Usuario: any;
+  estaLogueadoBandera = false;
 
   constructor(
     private router: Router,
@@ -27,16 +29,15 @@ export class AuthService {
 // ==================================================
 estaLogueado() {
 
-  // this.token = localStorage.getItem('token');
+  this.token = localStorage.getItem('token');
   Preferences.get({ key: 'token' }).then((result) => {
     this.token = result.value;
   });
 
-  if ((this.token === "sistegeo-logueo")) {
+  if ((this.token === "sistegeo-logueo") || this.estaLogueadoBandera == true) {
     return true;
   } else {
     return false;
-
   }
 }
 
@@ -69,12 +70,11 @@ estaLogueado() {
                   value: response.IdUsuario
                 });
 
+              this.estaLogueadoBandera = true;
               this.IdUsuario = response.IdUsuario;
-              // console.log("This.idusuario es : ",this.IdUsuario)
-              // Preferences.set({
-              //     key: 'IdVehiculo',
-              //     value: response.IdVehiculo,
-              //   });
+              this.Usuario = response.Usuario;
+
+              this.router.navigate(['/home']);
 
               return true;
             }
@@ -98,6 +98,7 @@ estaLogueado() {
     Preferences.remove({ key: 'IdUsuario' });
     Preferences.remove({ key: 'IdVehiculo' });
 
+    this.estaLogueadoBandera = false;
     this.token = null;
     this.router.navigate(['/login']);
 

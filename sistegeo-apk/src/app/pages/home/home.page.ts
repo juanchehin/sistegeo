@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   vehiculos!: any;
   watch: Subscription;
   IdUsuario: string;
+  Usuario: any;
   vehiculoSeleccionado = 0;
   handlerMessage = '';
   roleMessage = '';
@@ -37,6 +38,9 @@ export class HomePage implements OnInit {
     this.listarVehiculos();
     // this.cargarStorage();
     this.IdUsuario = this.authServices.IdUsuario;
+    this.Usuario = this.authServices.Usuario;
+    console.log("Usuario es : ",this.Usuario)
+
   }
 
   // ==============================
@@ -53,6 +57,8 @@ export class HomePage implements OnInit {
     if(!this.estadoJornada)
     {
       console.log("IdUsuario es : ",this.IdUsuario)
+      console.log("Usuario es : ",this.Usuario)
+
       this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
       // this.services.inicioJornada(this.vehiculoSeleccionado,'1');
 
