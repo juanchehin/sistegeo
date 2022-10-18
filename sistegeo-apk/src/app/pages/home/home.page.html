@@ -17,7 +17,7 @@
         <p><a target="_blank" rel="noopener noreferrer">{{ now }}</a></p>
         <br>
         <!-- <strong class="capitalize">{{ folder }}</strong> -->
-        <ion-list>
+        <!-- <ion-list>
             <ion-item>
                 <ion-select interface="action-sheet" placeholder="Seleccionar Vechiculo">
                     <ion-select-option value="apples">Ninguno</ion-select-option>
@@ -25,7 +25,14 @@
                     <ion-select-option value="bananas">Mercedez 1800</ion-select-option>
                 </ion-select>
             </ion-item>
-        </ion-list>
+        </ion-list> -->
+
+        <div class="col-sm-6 form-group">
+            <label class="control-label" placeholder="Seleccionar Vechiculo">Selecciona tu Vehiculo : </label>
+            <ion-select class="form-control">
+                <ion-select-option [value]="vehiculo.IdVehiculo" *ngFor="let vehiculo of vehiculos">{{vehiculo.Vehiculo}} - {{vehiculo.Patente}}</ion-select-option>
+            </ion-select>
+        </div>
         <br><br>
 
         <ion-button color="success" (click)="jornada()" [disabled]="estadoJornada">Iniciar jornada</ion-button>

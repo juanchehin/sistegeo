@@ -11,6 +11,7 @@ export class HomePage implements OnInit {
   public folder: string;
   public estadoJornada = false;
   public now: Date = new Date();
+  vehiculos!: any;
 
   constructor(
     private geolocation: Geolocation,
@@ -21,9 +22,12 @@ export class HomePage implements OnInit {
    }
 
   ngOnInit() {
+    this.listarVehiculos();
   }
 
-
+  // ==============================
+  // Inicia/Finaliza la jornada de seguimiento
+  // ==============================
   jornada()
   {
     this.estadoJornada = !this.estadoJornada;
@@ -54,6 +58,22 @@ export class HomePage implements OnInit {
       // Desuscribirme de watch
         //  watch.unsubscribe();
     }
+  }
+
+  // ==============================
+  // ==============================
+  listarVehiculos()
+  {
+    this.services.listarVehiculos(  )
+    .subscribe( (resp: any) => {
+
+       this.vehiculos = resp.vehiculos[0];
+
+      //  this.cargando = false;
+
+     });
+
+
   }
 
 

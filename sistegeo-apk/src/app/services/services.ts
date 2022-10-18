@@ -36,4 +36,15 @@ enviarData( dataLtLg: any ) {
 
 }
 
+// ==============================
+listarVehiculos(  ) {
+
+  console.log('entra en listarVehiculos');
+
+    let url = URL_SERVICIOS + '/vehiculos/listar';
+    // url += '?IdRol=' + this.IdRol;  // params
+    return this.http.get( url );
+
+}
+
 }
