@@ -20,13 +20,20 @@ export class Services {
 //  Envia latitud y longitud al backend
 // ==================================================
 enviarData( dataLtLg: any ) {
+
   console.log("data es service : " + dataLtLg);
 
-  let url = URL_SERVICIOS + '/dataGeolocalizacion';
+  let url = URL_SERVICIOS + '/dataGeolocalizacion/setData';
 
   console.log("url es service : " + url);
 
-    this.http.get( url,dataLtLg ).subscribe();
+  this.http.post( url,
+    {
+      latitud: dataLtLg.coords.latitude,
+      longitud: dataLtLg.coords.longitude
+    }
+    ).subscribe();
+
 }
 
 }

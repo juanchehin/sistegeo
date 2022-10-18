@@ -7,9 +7,15 @@ class GeolocalizacionController {
     //        .....
     // ==================================================
     
-    public async recibeData(req: Request, res: Response): Promise<void> {
-         console.log("req en back es : ",req);
-    
+    public async setData(req: Request, res: Response): Promise<void> {
+        var latitud;
+        var longitud;
+        
+
+        latitud = req.body.latitud;
+        longitud = req.body.longitud;
+
+        // Enviar a BD
      }
      
     // ==================================================
@@ -18,9 +24,11 @@ class GeolocalizacionController {
     // ==================================================
     
     public async getData(req: Request, res: Response): Promise<void> {
-        console.log("req getData : ",req);
     
-        res.json('data devuelta');
+        res.json({
+            latitude: -27.4301327,
+            longitude: -65.6152168
+        });
     
     }
 }

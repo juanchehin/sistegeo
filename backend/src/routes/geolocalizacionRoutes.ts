@@ -13,7 +13,7 @@ class GeolocalizacionRoutes {
     }
 
     config(): void {
-        this.router.get('/', geolocalizacionController.recibeData);
+        this.router.post('/setData', geolocalizacionController.setData);
         this.router.get('/getData', geolocalizacionController.getData);
 
         // this.router.get('/clientes/:desde', [mdAutenticacion.verificaToken,mdAutenticacion.verificaProfesionalAdmin],personasController.listarClientes);

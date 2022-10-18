@@ -20,24 +20,15 @@ export class MapaComponent implements OnInit {
   lat: number = 28.626137;
   lng: number = 79.821603;
   lastInfoWindow: any;
+  banderaPrimeraVez = false;
+  contador = 1;
 
   markers: any[] = [
     {
-      lat: 28.625485,
-      lng: 79.821091,
+      id: 1,
+      lat: '',
+      lng: '',
       label: { color: 'white', text: 'P1' },
-      draggable: true
-    },
-    {
-      lat: 28.625293,
-      lng: 79.817926,
-      label: { color: 'white', text: 'P2' },
-      draggable: false
-    },
-    {
-      lat: 28.625182,
-      lng: 79.814640,
-      label: { color: 'white', text: 'P3' },
       draggable: true
     }
   ]
@@ -75,6 +66,48 @@ actualizarPosicion(){
                .subscribe( (resp: any) => {
 
                 console.log("resp es : ", resp);
+
+                if(this.banderaPrimeraVez == false) {
+                  this.markers.push({
+                    lat: resp.latitude,
+                    lng: resp.longitude,
+                    draggable: true
+                  });
+
+
+                  this.lat = resp.latitude + this.contador;
+                  this.lng = resp.longitude + this.contador;
+
+                  this.banderaPrimeraVez = true;
+                }
+                else
+                {
+                  console.log("pasa else")
+                  // actualizar datos
+                  // this.markers.getUpdate(item.id)
+                  // .subscribe(updatedItem => {
+                  //   item = updatedItem;
+                  // });
+
+                  this.markers.forEach(item =>{
+                    if(item.id == 1){
+                        item.lat = resp.latitude + this.contador;
+                        item.lng = resp.longitude + this.contador;
+
+                        this.lat = resp.latitude + this.contador;
+                        this.lng = resp.longitude + this.contador;
+
+
+  console.log("this.lat : ",this.lat)
+  console.log("this.lng : ",this.lng)
+
+  console.log("this.contador : ",this.contador)
+  // this.contador = this.contador + 0.1;
+
+                    }
+                });
+                }
+
 
               })
 

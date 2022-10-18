@@ -12,14 +12,12 @@ export class sharedService {
 
   constructor(private http: HttpClient) { }
 
-  // ==================================================
+// ==================================================
 //
 // ==================================================
   damePosicion(){
 
     let url = URL_SERVICIOS + '/dataGeolocalizacion/getData';
-
-    console.log("pasa damePosicion url : " + url);
 
     return this.http.get( url );
   }

@@ -27,6 +27,7 @@ export class HomePage implements OnInit {
   jornada()
   {
     this.estadoJornada = !this.estadoJornada;
+    console.log("EstadoJornada es : ",this.estadoJornada);
     let watch = this.geolocation.watchPosition();
 
     if(this.estadoJornada == true){
