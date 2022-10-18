@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Services } from '../../services/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ export class HomePage implements OnInit {
   public estadoJornada = false;
   public now: Date = new Date();
   vehiculos!: any;
+  watch: Subscription;
 
   constructor(
     private geolocation: Geolocation,
@@ -31,34 +33,24 @@ export class HomePage implements OnInit {
   jornada()
   {
     this.estadoJornada = !this.estadoJornada;
+
     console.log("EstadoJornada es : ",this.estadoJornada);
-    let watch = this.geolocation.watchPosition();
 
-    if(this.estadoJornada == true){
-        this.geolocation.getCurrentPosition().then((resp) => {
-          console.log("resp es : ",resp);
-          // resp.coords.latitude
-          // resp.coords.longitude
-         }).catch((error) => {
-           console.log('Error getting location', error);
-         });
+    if(this.estadoJornada)
+    {
+      this.watch = this.geolocation.watchPosition().subscribe(pos => {
+        console.log("pos es : ",pos);
 
-         watch.subscribe((data) => {
-          console.log("data es : ",data);
-
-          this.services.enviarData(data);
-          // data can be a set of coordinates, or an error (if an error occurred).
-          // data.coords.latitude
-          // data.coords.longitude
-         });
+        this.services.enviarData(pos);
+      });
     }
     else
     {
-      this.estadoJornada = !this.estadoJornada;
-      // Desuscribirme de watch
-        //  watch.unsubscribe();
+      this.watch.unsubscribe();
     }
+
   }
+
 
   // ==============================
   // ==============================
