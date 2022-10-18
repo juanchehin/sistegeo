@@ -13,6 +13,7 @@ const URL_SERVICIOS = environment.URL_SERVICIOS;
 export class AuthService {
 
   token: any;
+  IdUsuario: any;
 
   constructor(
     private router: Router,
@@ -68,7 +69,7 @@ estaLogueado() {
                   value: response.IdUsuario
                 });
 
-              // this.IdUsuario = response.IdUsuario;
+              this.IdUsuario = response.IdUsuario;
               // console.log("This.idusuario es : ",this.IdUsuario)
               // Preferences.set({
               //     key: 'IdVehiculo',

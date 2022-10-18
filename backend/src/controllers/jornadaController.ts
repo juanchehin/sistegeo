@@ -13,19 +13,16 @@ class JornadaController {
         var longitud = req.body.longitud;
         var IdVehiculo = req.body.IdVehiculo;
 
-        console.log("req.body : ",req.body);
-
         pool.query(`call bsp_trazabilidad('${IdVehiculo}','${latitud}','${longitud}')`, function(err: any, result: any){
             if(err){
                 console.log("error", err);
                 return;
             }
-            // res.json({
-            //     "whatch": 'Ok'
-            // });
+            res.json({
+                "whatch": 'Ok'
+            });
         })
 
-        // Enviar a BD
      }
     // ==================================================
     //        .....
@@ -35,6 +32,11 @@ class JornadaController {
 
         var IdVehiculo = req.body.IdVehiculo;
         var IdUsuario = req.body.IdUsuario;
+
+        if(IdUsuario === undefined)
+        {
+            return;
+        }
 
         pool.query(`call bsp_inicio_jornada('${IdVehiculo}','${IdUsuario}')`, function(err: any, result: any){
             if(err){

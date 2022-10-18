@@ -21,11 +21,7 @@ export class Services {
 // ==================================================
 trazabilidad( IdVehiculo: any,dataLtLg: any ) {
 
-  console.log("data trazabilidad es service : " + dataLtLg);
-
   let url = URL_SERVICIOS + '/jornada/trazabilidad';
-
-  console.log("url es trazabilidad service : " + url);
 
   this.http.post( url,
     {

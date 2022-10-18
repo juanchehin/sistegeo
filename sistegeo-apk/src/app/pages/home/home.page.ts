@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
   constructor(
     private geolocation: Geolocation,
     private services: Services,
-    // private authServices: AuthService,
+    private authServices: AuthService,
     private alertCtrl: AlertController
     ) {
     setInterval(() => {
@@ -35,7 +35,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.listarVehiculos();
-    this.cargarStorage();
+    // this.cargarStorage();
+    this.IdUsuario = this.authServices.IdUsuario;
   }
 
   // ==============================
@@ -52,11 +53,12 @@ export class HomePage implements OnInit {
     if(!this.estadoJornada)
     {
       console.log("IdUsuario es : ",this.IdUsuario)
-      // this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
-      this.services.inicioJornada(this.vehiculoSeleccionado,'1');
+      this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
+      // this.services.inicioJornada(this.vehiculoSeleccionado,'1');
 
       this.watch = this.geolocation.watchPosition().subscribe(pos => {
         this.services.trazabilidad(this.vehiculoSeleccionado,pos);
+        console.log("watch")
       });
       this.estadoJornada = !this.estadoJornada;
 
