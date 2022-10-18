@@ -2,9 +2,9 @@ import { Router } from 'express';
 
 var mdAutenticacion = require('../middlewares/autenticacion');
 
-import geolocalizacionController from '../controllers/geolocalizacionController';
+import jornadaController from '../controllers/jornadaController';
 
-class GeolocalizacionRoutes {
+class JornadaRoutes {
 
     public router: Router = Router();
 
@@ -13,8 +13,9 @@ class GeolocalizacionRoutes {
     }
 
     config(): void {
-        this.router.post('/setData', geolocalizacionController.setData);
-        this.router.get('/getData', geolocalizacionController.getData);
+        this.router.post('/inicio', jornadaController.inicioJornada);
+        this.router.post('/trazabilidad', jornadaController.trazabilidad);
+        this.router.get('/fin', jornadaController.finJornada);
 
         // this.router.get('/clientes/:desde', [mdAutenticacion.verificaToken,mdAutenticacion.verificaProfesionalAdmin],personasController.listarClientes);
         // this.router.put('/cliente/eliminar/:IdPersona', [mdAutenticacion.verificaToken,mdAutenticacion.verificaProfesionalAdmin], personasController.eliminarCliente);    // Actualiza
@@ -27,5 +28,5 @@ class GeolocalizacionRoutes {
 
 }
 
-const geolocalizacionRoutes = new GeolocalizacionRoutes();
-export default geolocalizacionRoutes.router;
+const jornadaRoutes = new JornadaRoutes();
+export default jornadaRoutes.router;

@@ -19,19 +19,19 @@ public async listarVehiculos(req: Request,res: Response): Promise<void> {
     })
 }
      
-    // ==================================================
-    //   Obtiene la data de localizacion y la devuelve
-    //    al front 
-    // ==================================================
+// ==================================================
+//   Obtiene la data de localizacion y la devuelve
+//    al front 
+// ==================================================
     
-    public async getData(req: Request, res: Response): Promise<void> {
+public async getData(req: Request, res: Response): Promise<void> {
     
         res.json({
             latitude: -27.4301327,
             longitude: -65.6152168
         });
     
-    }
+}
 }
 
 

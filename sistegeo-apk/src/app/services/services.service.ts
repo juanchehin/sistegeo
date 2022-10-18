@@ -17,13 +17,13 @@ export class Services {
   }
 
 // ==================================================
-//  Envia latitud y longitud al backend
+//  Envia latitud y longitud al backend - Trazabilidad
 // ==================================================
-enviarData( dataLtLg: any ) {
+trazabilidad( dataLtLg: any ) {
 
   console.log("data es service : " + dataLtLg);
 
-  let url = URL_SERVICIOS + '/dataGeolocalizacion/setData';
+  let url = URL_SERVICIOS + '/jornada/trazabilidad';
 
   console.log("url es service : " + url);
 
@@ -35,6 +35,37 @@ enviarData( dataLtLg: any ) {
     ).subscribe();
 
 }
+// ==================================================
+//  Inicia la jornada
+// ==================================================
+inicioJornada( IdVehiculo: number,IdUsuario: number ) {
+
+  let url = URL_SERVICIOS + '/jornada/inicio';
+
+  console.log("url es finJornada service : " + url);
+
+  this.http.post( url,
+    {
+      IdVehiculo: IdVehiculo,
+      IdUsuario: IdUsuario
+    }
+    ).subscribe();
+
+}
+
+// ==================================================
+//  Finaliza jornada
+// ==================================================
+finJornada(  ) {
+
+  let url = URL_SERVICIOS + '/jornada/fin';
+
+  console.log("url es finJornada service : " + url);
+
+  this.http.get( url );
+
+}
+
 
 // ==============================
 listarVehiculos(  ) {

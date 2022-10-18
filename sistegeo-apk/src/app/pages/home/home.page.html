@@ -19,7 +19,7 @@
 
         <div class="col-sm-6 form-group">
             <label class="control-label" placeholder="Seleccionar Vechiculo">Selecciona tu Vehiculo : </label>
-            <ion-select class="form-control">
+            <ion-select class="form-control" [(ngModel)]="vehiculoSeleccionado" (ngModelChange)="cambios($event)">
                 <ion-select-option [value]="vehiculo.IdVehiculo" *ngFor="let vehiculo of vehiculos">{{vehiculo.Vehiculo}} - {{vehiculo.Patente}}</ion-select-option>
             </ion-select>
         </div>

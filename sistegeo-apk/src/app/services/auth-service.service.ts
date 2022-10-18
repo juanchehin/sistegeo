@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { Preferences  } from '@capacitor/preferences';
 import { Router } from '@angular/router';
-// import { SettingsService } from './settings.service';
+import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
+const URL_SERVICIOS = environment.URL_SERVICIOS;
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,12 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    // private settingsService: SettingsService
+    private http: HttpClient,
+    private alertCtrl: AlertController
   ) {}
 
+  IdVehiculo: number;
+  IdUsuario: number;
 
 // ==================================================
 //        Permite saber si un usuario esta logueado
@@ -41,33 +46,70 @@ estaLogueado() {
 // ==================================================
   login(user: string, password: string) {
 
-    // Enviar datos al backend
-
-    // Respuesta del backend
-
-    var respuesta = true;
-
-    if(respuesta)
+    var persona =
     {
-      Preferences.set({
-          key: 'token',
-          value: 'sistegeo-logueo',
-        });
-
-      return true;
+      user: user,
+      password: password
     }
-    return false;
+
+    const url = URL_SERVICIOS + '/login';
+
+    return this.http.post(url, persona)
+        .subscribe((response: any) =>
+          {
+
+            if(response.mensaje != 'Error de credenciales')
+            {
+              Preferences.set({
+                  key: 'token',
+                  value: 'sistegeo-logueo', //response.token
+                });
+
+              Preferences.set({
+                  key: 'IdUsuario',
+                  value: response.IdUsuario,
+                });
+
+              Preferences.set({
+                  key: 'IdVehiculo',
+                  value: response.IdVehiculo,
+                });
+
+              return true;
+            }
+
+            // mostrar modal
+            this.showAlert('Error de logueo');
+            // loadingEl.dismiss();
+            return false;
+          }
+    )
+
+
   }
 
 // ==================================================
 //    Logout
 // ==================================================
   logout() {
-    // localStorage.removeItem('token');
+
     Preferences.remove({ key: 'token' });
+    Preferences.remove({ key: 'IdUsuario' });
+    Preferences.remove({ key: 'IdVehiculo' });
+
     this.token = null;
     this.router.navigate(['/login']);
-    // this.settingsService.limpiarIP();
+
+  }
+
+  private showAlert(message: string) {
+    this.alertCtrl
+      .create({
+        header: 'Mensaje',
+        message: message,
+        buttons: ['Okay']
+      })
+      .then(alertEl => alertEl.present());
   }
 
 }

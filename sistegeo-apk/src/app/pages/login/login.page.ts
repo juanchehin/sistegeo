@@ -16,7 +16,6 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    // private settingsService: SettingsService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router : Router
@@ -25,6 +24,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  // ==============================
   authenticate(user: string, password: string) {
     this.isLoading = true;
 
@@ -44,16 +44,17 @@ export class LoginPage implements OnInit {
         } else {
           this.showAlert('Error de logueo');
           loadingEl.dismiss();
-          // authObs = this.authService.signup(email, password);
         }
       });
 
 
   }
+  // ==============================
 
   onSwitchAuthMode() {
     this.isLogin = !this.isLogin;
   }
+  // ==============================
 
   private showAlert(message: string) {
     this.alertCtrl
@@ -64,6 +65,7 @@ export class LoginPage implements OnInit {
       })
       .then(alertEl => alertEl.present());
   }
+  // ==============================
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
