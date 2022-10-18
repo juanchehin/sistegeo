@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apikeyGoogleMaps: '',
+  apikeyGoogleMaps: 'AIzaSyAUbVZAzJ3kNlQAXYMrByy8DQ40AD1qnhI',
   URL_SERVICIOS: 'http://localhost:3000/api'
 };
 
