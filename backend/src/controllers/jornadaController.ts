@@ -11,8 +11,11 @@ class JornadaController {
 
         var latitud = req.body.latitud;
         var longitud = req.body.longitud;
+        var IdVehiculo = req.body.IdVehiculo;
 
-        pool.query(`call bsp_trazabilidad('${latitud}','${longitud}')`, function(err: any, result: any){
+        console.log("req.body : ",req.body);
+
+        pool.query(`call bsp_trazabilidad('${IdVehiculo}','${latitud}','${longitud}')`, function(err: any, result: any){
             if(err){
                 console.log("error", err);
                 return;

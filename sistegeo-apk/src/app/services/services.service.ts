@@ -19,16 +19,17 @@ export class Services {
 // ==================================================
 //  Envia latitud y longitud al backend - Trazabilidad
 // ==================================================
-trazabilidad( dataLtLg: any ) {
+trazabilidad( IdVehiculo: any,dataLtLg: any ) {
 
-  console.log("data es service : " + dataLtLg);
+  console.log("data trazabilidad es service : " + dataLtLg);
 
   let url = URL_SERVICIOS + '/jornada/trazabilidad';
 
-  console.log("url es service : " + url);
+  console.log("url es trazabilidad service : " + url);
 
   this.http.post( url,
     {
+      IdVehiculo: IdVehiculo,
       latitud: dataLtLg.coords.latitude,
       longitud: dataLtLg.coords.longitude
     }

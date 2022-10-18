@@ -56,7 +56,7 @@ export class HomePage implements OnInit {
       this.services.inicioJornada(this.vehiculoSeleccionado,'1');
 
       this.watch = this.geolocation.watchPosition().subscribe(pos => {
-        this.services.trazabilidad(pos);
+        this.services.trazabilidad(this.vehiculoSeleccionado,pos);
       });
       this.estadoJornada = !this.estadoJornada;
 
