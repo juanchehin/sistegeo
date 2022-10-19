@@ -2,9 +2,15 @@ import { Request, Response } from 'express';
 import pool from '../database';
 const falso = require("@ngneat/falso")
 
+// lt y lng del local de la esquina - Aguilares
+var latitud = -27.4356104;
+var longitud = -65.6103222;
+var IdVehiculo = 1;
+
 class JornadaController {
 
       
+
     // ==================================================
     //        .....
     // ==================================================
@@ -17,19 +23,19 @@ class JornadaController {
         
         // **** Simulacion de latitud y longitud *****
 
-        var latitud = falso.randLatitude();
-        var longitud = falso.randLongitude();
-        var IdVehiculo = 1;
+        // var latitud = falso.randLatitude();
+        // var longitud = falso.randLongitude();
+        // var IdVehiculo = 1;
 
         // actualizacion de latidud y longitud
-        const intervalMs = 5000
-        setInterval(function () {
-            latitud = latitud + falso.randNumber({ min: -1.0, max: 1.0 });
-            longitud = longitud + falso.randNumber({ min: -1.0, max: 1.0 });
+        const intervalMs = 50000
+        setInterval( () => {
+            // latitud = latitud + falso.randNumber({ min: -1.0, max: 1.0 });
+            // longitud = longitud + falso.randNumber({ min: -1.0, max: 1.0 });
 
-            console.log("latitud : ",latitud);
-            console.log("longitud : ",longitud);
-        
+            latitud = latitud + 0.0001;
+            longitud = longitud + 0.0001;
+
         }, intervalMs)
 
         res.json({

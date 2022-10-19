@@ -25,13 +25,13 @@ export class MapaComponent implements OnInit {
 
   // Vehic
   vehiculos: any[] = [
-    // {
-    //   IdVehiculo: 1,
-    //   lat: '',
-    //   lng: '',
-    //   label: { color: 'white', text: 'P1' },
-    //   draggable: true
-    // }
+    {
+      IdVehiculo: 1,
+      lat: '-27.4301729',
+      lng: '-65.6152229',
+      label: { color: 'white', text: 'P1' },
+      draggable: true
+    }
   ]
 
   markerClicked(marker: any, index: number, infoWindowRef: any) {
@@ -71,8 +71,9 @@ actualizarPosicion(){
                 if(this.banderaPrimeraVez == false) {
                   this.vehiculos.push({
                     IdVehiculo: resp.IdVehiculo,
-                    latitud: resp.latitud,
-                    longitud: resp.longitud,
+                    lat: resp.latitud,
+                    lng: resp.longitud,
+                    label: { color: 'white', text: 'P1' },
                     draggable: true
                   });
 
@@ -87,10 +88,16 @@ actualizarPosicion(){
                     console.log("resp.IdVehiculo forEach : ",resp.IdVehiculo)
 
                     if(item.IdVehiculo == resp.IdVehiculo){
+                      console.log("pasa if , item es : ",item)
                         // item.name = newitem.name
-                        item.latitud = resp.latitud,
-                        item.longitud = resp.longitud
+                        item.lat = resp.latitud,
+                        item.lng = resp.longitud,
+                        item.label = { color: 'white', text: 'P1' },
+                        item.draggable = true;
                     }
+
+                    console.log("vehiculos es : ",this.vehiculos)
+
                 });
                 }
 
