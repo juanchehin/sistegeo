@@ -3,10 +3,10 @@
 
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
 
-    <agm-marker *ngFor="let marker of markers; let i = index" (markerClick)="markerClicked(marker, i, infoWindowRef)" [latitude]="marker.lat" [longitude]="marker.lng" [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd($event, i)">
+    <agm-marker *ngFor="let vehiculo of vehiculos; let i = index" (markerClick)="markerClicked(vehiculo, i, infoWindowRef)" [latitude]="vehiculo.lat" [longitude]="vehiculo.lng" [label]="vehiculo.label" [markerDraggable]="vehiculo.draggable" (dragEnd)="markerDragEnd($event, i)">
 
         <agm-info-window #infoWindowRef>
-            <b>{{marker.lat}},  {{marker.lng}}</b>
+            <b>{{vehiculo.lat}},  {{vehiculo.lng}}</b>
         </agm-info-window>
 
     </agm-marker>

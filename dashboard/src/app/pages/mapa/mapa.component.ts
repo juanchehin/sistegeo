@@ -17,20 +17,21 @@ export class MapaComponent implements OnInit {
   }
 
   zoom: number = 15;
-  lat: number = 28.626137;
-  lng: number = 79.821603;
+  lat: number = -27.4356104;
+  lng: number = -65.6103222;
   lastInfoWindow: any;
   banderaPrimeraVez = false;
   contador = 1;
 
-  markers: any[] = [
-    {
-      id: 1,
-      lat: '',
-      lng: '',
-      label: { color: 'white', text: 'P1' },
-      draggable: true
-    }
+  // Vehic
+  vehiculos: any[] = [
+    // {
+    //   IdVehiculo: 1,
+    //   lat: '',
+    //   lng: '',
+    //   label: { color: 'white', text: 'P1' },
+    //   draggable: true
+    // }
   ]
 
   markerClicked(marker: any, index: number, infoWindowRef: any) {
@@ -42,7 +43,7 @@ export class MapaComponent implements OnInit {
   }
 
   mapClicked($event: any) {
-    this.markers.push({
+    this.vehiculos.push({
       lat: $event.coords.lat,
       lng: $event.coords.lng,
       draggable: true
@@ -68,15 +69,12 @@ actualizarPosicion(){
                 console.log("resp es : ", resp);
 
                 if(this.banderaPrimeraVez == false) {
-                  this.markers.push({
-                    lat: resp.latitude,
-                    lng: resp.longitude,
+                  this.vehiculos.push({
+                    IdVehiculo: resp.IdVehiculo,
+                    latitud: resp.latitud,
+                    longitud: resp.longitud,
                     draggable: true
                   });
-
-
-                  this.lat = resp.latitude + this.contador;
-                  this.lng = resp.longitude + this.contador;
 
                   this.banderaPrimeraVez = true;
                 }
@@ -84,33 +82,19 @@ actualizarPosicion(){
                 {
                   console.log("pasa else")
                   // actualizar datos
-                  // this.markers.getUpdate(item.id)
-                  // .subscribe(updatedItem => {
-                  //   item = updatedItem;
-                  // });
+                  this.vehiculos.forEach(item =>{
+                    console.log("pasa forEach : ",item)
+                    console.log("resp.IdVehiculo forEach : ",resp.IdVehiculo)
 
-                  this.markers.forEach(item =>{
-                    if(item.id == 1){
-                        item.lat = resp.latitude + this.contador;
-                        item.lng = resp.longitude + this.contador;
-
-                        this.lat = resp.latitude + this.contador;
-                        this.lng = resp.longitude + this.contador;
-
-
-  console.log("this.lat : ",this.lat)
-  console.log("this.lng : ",this.lng)
-
-  console.log("this.contador : ",this.contador)
-  // this.contador = this.contador + 0.1;
-
+                    if(item.IdVehiculo == resp.IdVehiculo){
+                        // item.name = newitem.name
+                        item.latitud = resp.latitud,
+                        item.longitud = resp.longitud
                     }
                 });
                 }
 
-
-              })
-
+        })
   )
 
 }

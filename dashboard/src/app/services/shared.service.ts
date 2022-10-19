@@ -17,7 +17,7 @@ export class sharedService {
 // ==================================================
   damePosicion(){
 
-    let url = URL_SERVICIOS + '/dataGeolocalizacion/getData';
+    let url = URL_SERVICIOS + '/jornada/trazabilidad';
 
     return this.http.get( url );
   }

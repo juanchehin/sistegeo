@@ -14,7 +14,7 @@ class JornadaRoutes {
 
     config(): void {
         this.router.post('/inicio', jornadaController.inicioJornada);
-        this.router.post('/trazabilidad', jornadaController.trazabilidad);
+        this.router.get('/trazabilidad', jornadaController.trazabilidad);
         this.router.get('/fin/:IdVehiculo/:IdUsuario', jornadaController.finJornada);
 
         // this.router.get('/clientes/:desde', [mdAutenticacion.verificaToken,mdAutenticacion.verificaProfesionalAdmin],personasController.listarClientes);
