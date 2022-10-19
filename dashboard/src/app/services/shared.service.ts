@@ -22,6 +22,37 @@ export class sharedService {
     return this.http.get( url );
   }
 
+// ==================================================
+//        Cargar planes - Peticion GET al server
+// ==================================================
+
+listarChoferesPaginado( desde: number , incluyeBajas: number ) {
+
+  const url = URL_SERVICIOS + '/usuarios/choferes/listar/' + desde + '/' + incluyeBajas;
+  return this.http.get( url );
+
+}
+
+// ==================================================
+//        Da de baja una plan
+// ==================================================
+
+darBajaChofer( IdUsuario: string ) {
+
+  let url = URL_SERVICIOS + '/choferes/baja/' + IdUsuario;
+  // url += '?IdRol=' + this.personaService.IdRol;
+
+  return this.http.put(
+    url,
+    IdUsuario,
+    // {
+    //   headers: {
+    //     token: this.personaService.token
+    //   }
+    // }
+);
+
+}
 
 
 }

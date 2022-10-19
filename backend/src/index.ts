@@ -4,6 +4,7 @@ import cors from 'cors';
 import loginRoutes from './routes/loginRoutes';
 import jornadaRoutes from './routes/jornadaRoutes';
 import vehiculosRoutes from './routes/vehiculosRoutes';
+import usuariosRoutes from './routes/usuariosRoutes';
 
 
 class Server {
@@ -58,6 +59,7 @@ class Server {
         //     }
         //   }
 
+        this.app.use('/api/usuarios', usuariosRoutes);
         this.app.use('/api/jornada', jornadaRoutes);
         this.app.use('/api/vehiculos', vehiculosRoutes);
         this.app.use('/api/login', loginRoutes);

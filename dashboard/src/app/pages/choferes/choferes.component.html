@@ -1,3 +1,68 @@
-<p>Choferes</p>
+<h1 class="text-center">Choferes</h1>
 
-<iframe src="https://www.google.com/maps/embed?pb=!…" width=”600″ height=”450″ frameborder=”0″ style=”border:0″ allowfullscreen></iframe>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="custom-control custom-switch">
+                    <input (click)="modificaBandera( )" type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1">Incluye bajas</label>
+                </div>
+                <div class="text-right">
+                    <button [routerLink]="['/mantenimiento/plan']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <i class="fa fa-plus"></i>
+                    Nuevo Chofer
+                  </button>
+                </div>
+                <h3 class="card-title">Planes registrado ( <small> {{ totalChoferes }} </small> )</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                            <th>Usuario</th>
+                            <th>Telefono</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let chofer of choferes">
+                            <td>
+                                {{ chofer.Apellidos }}
+                            </td>
+                            <td>{{ chofer.Nombres }}</td>
+                            <td>{{ chofer.Usuario }}</td>
+                            <td>{{ chofer.Telefono }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+
+                                    <button [routerLink]="['/mantenimiento/plan/editar', chofer.IdUsuario ]" class="btn btn-muted">
+                                  <i class="material-icons">
+                                      edit
+                                      </i>
+                                  </button>
+                                    <button *ngIf="chofer.EstadoUsuario === 'A'" (click)="bajaChofer( chofer )" class="btn btn-danger">
+                                      <i class="material-icons">
+                                      delete
+                                      </i>
+                                  </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                  Anteriores
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary" style="margin-left: 50px; ">
+                    Siguientes
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
