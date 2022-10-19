@@ -20,7 +20,7 @@
         <br>
         <div class="col-sm-6 form-group">
             <label class="control-label" placeholder="Seleccionar Vechiculo">Selecciona tu Vehiculo : </label>
-            <ion-select class="form-control" [(ngModel)]="vehiculoSeleccionado" (ngModelChange)="cambios($event)">
+            <ion-select class="form-control" [(ngModel)]="vehiculoSeleccionado" (ngModelChange)="cambios($event)" [disabled]="disableVehiculo">
                 <ion-select-option [value]="vehiculo.IdVehiculo" *ngFor="let vehiculo of vehiculos">{{vehiculo.Vehiculo}} - {{vehiculo.Patente}}</ion-select-option>
             </ion-select>
         </div>
@@ -29,5 +29,8 @@
         <br><br>
         <ion-button color="danger" style="text-align:center" (click)="jornada()" [disabled]="!estadoJornada">Finalizar jornada</ion-button>
     </div>
+    <br>
+    <p><a target="_blank" rel="noopener noreferrer">Latitude : {{latitude}}</a></p>
+    <p><a target="_blank" rel="noopener noreferrer">Longitude : {{longitude}}</a></p>
 
 </ion-content>

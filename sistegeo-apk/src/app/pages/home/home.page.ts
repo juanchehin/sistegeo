@@ -22,6 +22,9 @@ export class HomePage implements OnInit {
   vehiculoSeleccionado = 0;
   handlerMessage = '';
   roleMessage = '';
+  latitude: any;
+  longitude: any;
+  disableVehiculo = false;
 
   constructor(
     private geolocation: Geolocation,
@@ -39,7 +42,6 @@ export class HomePage implements OnInit {
     // this.cargarStorage();
     this.IdUsuario = this.authServices.IdUsuario;
     this.Usuario = this.authServices.Usuario;
-    console.log("Usuario es : ",this.Usuario)
 
   }
 
@@ -56,12 +58,15 @@ export class HomePage implements OnInit {
 
     if(!this.estadoJornada)
     {
-
+      this.disableVehiculo = true;
       this.services.inicioJornada(this.vehiculoSeleccionado,this.IdUsuario);
 
-      this.watch = this.geolocation.watchPosition().subscribe(pos => {
+      this.watch = this.geolocation.watchPosition().subscribe((pos: any) => {
         this.services.trazabilidad(this.vehiculoSeleccionado,pos);
-        console.log("watch")
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;
+
+        console.log("watch",pos)
       });
       this.estadoJornada = !this.estadoJornada;
 
@@ -140,6 +145,7 @@ cambios(nuevoValor: any) {
             this.watch.unsubscribe();
             this.services.finJornada(this.vehiculoSeleccionado,'1');
             this.estadoJornada = !this.estadoJornada;
+            this.disableVehiculo = false;
 
 
           },
