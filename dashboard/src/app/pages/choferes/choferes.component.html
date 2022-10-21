@@ -9,12 +9,12 @@
                     <label class="custom-control-label" for="customSwitch1">Incluye bajas</label>
                 </div>
                 <div class="text-right">
-                    <button [routerLink]="['/mantenimiento/plan']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button [routerLink]="['/nuevo-chofer']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                     <i class="fa fa-plus"></i>
                     Nuevo Chofer
                   </button>
                 </div>
-                <h3 class="card-title">Planes registrado ( <small> {{ totalChoferes }} </small> )</h3>
+                <h3 class="card-title">Choferes registrado ( <small> {{ totalChoferes }} </small> )</h3>
 
                 <table class="table table-hover">
                     <thead>
@@ -38,12 +38,12 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
 
-                                    <button [routerLink]="['/mantenimiento/plan/editar', chofer.IdUsuario ]" class="btn btn-muted">
+                                    <button [routerLink]="['/chofer/editar', chofer.IdUsuario ]" class="btn btn-muted">
                                   <i class="material-icons">
                                       edit
                                       </i>
                                   </button>
-                                    <button *ngIf="chofer.EstadoUsuario === 'A'" (click)="bajaChofer( chofer )" class="btn btn-danger">
+                                    <button *ngIf="chofer.Estado === 'A'" (click)="bajaChofer( chofer )" class="btn btn-danger">
                                       <i class="material-icons">
                                       delete
                                       </i>
