@@ -13,8 +13,10 @@ class UsuariosRoutes {
     }
 
     config(): void {
-        // this.router.post('/setData', geolocalizacionController.setData);
+        // Choferes
+        this.router.post('/choferes/alta', usuariosController.altaChofer);
         this.router.get('/choferes/listar/:desde/:incluyeBajas', usuariosController.listarChoferesPaginado);
+        // Usuarios
     }
 
 }

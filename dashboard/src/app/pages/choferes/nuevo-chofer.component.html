@@ -1,0 +1,39 @@
+<div class="container">
+    <h1 class="well">Nuevo Chofer</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="altaChofer()">
+                <div class="col-sm-12">
+
+                    <div class="alert alert-primary" role="alert">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Apellidos</label>
+                                <input formControlName="Apellidos" name="Apellidos" required type="text" placeholder="Apellidos" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Nombres</label><input formControlName="Nombres" name="Nombres" required type="text" placeholder="Nombres" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Usuario</label><input formControlName="Usuario" name="Usuario" required type="text" min="6" max="31" step="1" placeholder="Usuario" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Password</label><input formControlName="Password" name="Password" required type="text" min="6" max="31" step="1" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Telefono</label><input formControlName="Telefono" name="Telefono" required type="text" min="6" max="31" step="1" placeholder="Telefono" class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Observaciones </label>
+                                <textarea formControlName="Observaciones" name="Observaciones" type="textarea" placeholder="Observaciones" rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-info btn-lg btn-block text-uppercase">Cargar Chofer</button>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

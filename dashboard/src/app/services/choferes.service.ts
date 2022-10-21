@@ -7,20 +7,10 @@ const URL_SERVICIOS = environment.URL_SERVICIOS;
 @Injectable({
   providedIn: 'root'
 })
-export class sharedService {
+export class ChoferesService {
 
 
   constructor(private http: HttpClient) { }
-
-// ==================================================
-//
-// ==================================================
-  damePosicion(){
-
-    let url = URL_SERVICIOS + '/jornada/trazabilidad';
-
-    return this.http.get( url );
-  }
 
 // ==================================================
 //        Cargar planes - Peticion GET al server
@@ -32,6 +22,7 @@ listarChoferesPaginado( desde: number , incluyeBajas: number ) {
   return this.http.get( url );
 
 }
+
 
 // ==================================================
 //        Da de baja una plan
@@ -54,5 +45,15 @@ darBajaChofer( IdUsuario: string ) {
 
 }
 
+// ==================================================
+//
+// ==================================================
+
+altaChofer( chofer: any ) {
+
+  const url = URL_SERVICIOS + '/usuarios/choferes/alta/';
+  return this.http.post( url,chofer );
+
+}
 
 }

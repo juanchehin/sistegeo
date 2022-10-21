@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
-import { sharedService } from 'src/app/services/shared.service';
+import { MapaService } from 'src/app/services/mapa.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { sharedService } from 'src/app/services/shared.service';
 })
 export class MapaComponent implements OnInit {
 
-  constructor(private sharedService: sharedService) { }
+  constructor(private mapaService: MapaService) { }
 
   ngOnInit() {
     this.actualizarPosicion();
@@ -63,7 +63,7 @@ actualizarPosicion(){
 
   interval(3000).subscribe(x =>
 
-    this.sharedService.damePosicion()
+    this.mapaService.damePosicion()
                .subscribe( (resp: any) => {
 
                 console.log("resp es : ", resp);
@@ -96,7 +96,6 @@ actualizarPosicion(){
                         item.draggable = true;
                     }
 
-                    console.log("vehiculos es : ",this.vehiculos)
 
                 });
                 }

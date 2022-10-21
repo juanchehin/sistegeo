@@ -3,6 +3,48 @@ import pool from '../database';
 
 class UsuariosController {
 
+
+// ==================================================
+//        Inserta un Chofer
+// ==================================================
+public async altaChofer(req: Request, res: Response) {
+
+    var Apellidos = req.body.Apellidos;
+    var Nombres = req.body.Nombres;
+    var Password = req.body.Password;
+    var Telefono = req.body.Telefono;
+    var Observaciones = req.body.Observaciones;
+    var DNI = req.body.DNI;
+    var Usuario = req.body.Usuario;
+
+
+    pool.query(`call bsp_alta_chofer('${Apellidos}','${Nombres}','${Password}','${Telefono}','${DNI}','${Observaciones}'')`, function(err: any, result: any, fields: any){
+        if(err){
+            console.log("error : ", err);
+            res.status(404).json({ text: "Ocurrio un problema" });
+            return;
+        }
+        
+        if(result[0][0].Mensaje === 'El chofer ya se encuentra cargado'){
+            return res.json({
+                Mensaje: result[0][0].Mensaje,
+                pIdPersona: result[1][0].IdPersona
+            });
+        }
+    
+        if(result[0][0].Mensaje !== 'Ok'){
+            return res.json({
+                ok: false,
+                Mensaje: result[0][0].Mensaje
+            });
+        }
+
+        return res.json({ Mensaje: 'Ok' });
+    })
+
+}
+
+
 // ==================================================
 //        Lista personas desde cierto valor
 // ==================================================

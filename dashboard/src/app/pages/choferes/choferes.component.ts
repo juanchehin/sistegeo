@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
-import { sharedService } from 'src/app/services/shared.service';
+import { sharedService } from 'src/app/services/mapa.service';
 import Swal from 'sweetalert2';
 declare var swal: any;
 
